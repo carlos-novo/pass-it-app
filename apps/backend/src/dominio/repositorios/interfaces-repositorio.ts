@@ -17,10 +17,12 @@ import {
  */
 export interface IRepositorioSalas {
   /**
-   * Crea una nueva sala y la persiste.
+   * Crea una nueva sala con un código conocido y la persiste.
+   * @param primerEquipo Equipo que crea la sala (host)
+   * @param codigoSala Código único asignado a la sala
    * @returns El código único de la sala creada.
    */
-  crearSala(primerEquipo: Equipo): Promise<IdSala>;
+  crearSala(primerEquipo: Equipo, codigoSala: IdSala): Promise<IdSala>;
 
   /**
    * Añade un equipo a una sala existente.

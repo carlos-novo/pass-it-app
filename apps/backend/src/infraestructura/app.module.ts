@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { SalasModule } from './salas/salas.module';
 
 /**
  * Módulo raíz de la aplicación.
@@ -13,6 +14,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
       envFilePath: '.env',
     }),
+    SalasModule,
   ],
   controllers: [],
   providers: [],
