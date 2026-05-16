@@ -1,0 +1,33 @@
+version: '3.9'
+
+# ============================================================
+# Docker Compose — Pass It (Entorno de Desarrollo Local)
+# ============================================================
+# Levanta los servicios de infraestructura necesarios para el desarrollo.
+# El backend NestJS se ejecuta directamente en la máquina del desarrollador
+# con `npm run start:dev` para aprovechar el hot-reload.
+#
+# Uso:
+#   docker-compose up -d         → Levanta Redis en segundo plano
+#   docker-compose down          → Para y elimina los contenedores
+#   docker-compose logs redis    → Ver logs de Redis
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: pass-it-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - datos_redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  datos_redis:
+    driver: local
