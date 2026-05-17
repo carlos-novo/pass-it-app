@@ -6,7 +6,7 @@
 El sistema orquesta un modo torneo en tiempo real emparejando a los equipos para competir en una serie de minijuegos frenéticos.
 
 ## ⚙️ Mecánicas Principales
-- **Equipos y Dispositivos:** 2 a 4 equipos. 1 dispositivo por equipo.
+- **Equipos y Dispositivos:** Exactamente 2 o 4 equipos (3 equipos no permitidos). 1 dispositivo por equipo.
 - **Modo Torneo:** 
   - 4 equipos: Semifinales y Final.
   - 2 equipos: Final directa.
