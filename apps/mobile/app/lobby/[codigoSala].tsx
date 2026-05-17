@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import { MotiView } from 'moti';
 import { useLocalSearchParams } from 'expo-router';
 import { useSalaStore } from '@store/sala.store';
+import { useTorneo } from '@hooks/useTorneo';
 
 export default function LobbyScreen(): JSX.Element {
   const params = useLocalSearchParams();
@@ -10,6 +11,8 @@ export default function LobbyScreen(): JSX.Element {
 
   const equipos = useSalaStore((s) => s.equipos);
   const miEquipo = useSalaStore((s) => s.miEquipo);
+  
+  const { iniciarTorneo } = useTorneo(); // Activar los listeners del torneo en el móvil
 
   const esHost = equipos.length > 0 && miEquipo !== null && equipos[0].id === miEquipo.id;
 
@@ -35,7 +38,7 @@ export default function LobbyScreen(): JSX.Element {
       />
 
       {esHost && equipos.length >= 2 ? (
-        <Pressable style={styles.startButton}>
+        <Pressable style={styles.startButton} onPress={() => iniciarTorneo(3)}>
           <Text style={styles.startButtonText}>🏆 Iniciar Torneo</Text>
         </Pressable>
       ) : null}

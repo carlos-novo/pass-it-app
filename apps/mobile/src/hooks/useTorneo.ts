@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useRouter } from 'expo-router';
 import { useSalaStore } from '@store/sala.store';
 import { useTorneoStore } from '@store/torneo.store';
 import { useSocket } from './useSocket';
@@ -21,6 +22,7 @@ export function useTorneo(): {
   iniciarTorneo: (modalidad: ModalidadEliminatoria) => void;
   reportarResultado: (idEnfrentamiento: string, idEquipoGanador: string) => void;
 } {
+  const router = useRouter();
   const { socket } = useSocket();
   const codigoSala = useSalaStore((s) => s.codigoSala);
   const {
@@ -35,6 +37,7 @@ export function useTorneo(): {
 
     const onTorneoIniciado = (payload: EventosSocket.TorneoIniciadoPayload): void => {
       establecerTorneo(payload.torneo);
+      router.replace('/bracket');
     };
 
     const onMostrarEmparejamiento = (
