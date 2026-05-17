@@ -6,14 +6,34 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "@dominio/*": ["src/dominio/*"],
-      "@componentes/*": ["src/componentes/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@pantallas/*": ["src/pantallas/*"],
-      "@store/*": ["src/store/*"],
-      "@assets/*": ["assets/*"],
-      "@tipos-compartidos": ["../../packages/tipos-compartidos/src/index.ts"]
+      "@dominio/*": [
+        "src/dominio/*"
+      ],
+      "@componentes/*": [
+        "src/componentes/*"
+      ],
+      "@hooks/*": [
+        "src/hooks/*"
+      ],
+      "@pantallas/*": [
+        "src/pantallas/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "@tipos-compartidos": [
+        "../../packages/tipos-compartidos/src/index.ts"
+      ]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.d.ts", "expo-env.d.ts"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.d.ts",
+    "expo-env.d.ts",
+    ".expo/types/**/*.ts"
+  ]
 }
