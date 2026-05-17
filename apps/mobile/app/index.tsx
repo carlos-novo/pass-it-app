@@ -23,7 +23,7 @@ export default function HomeScreen(): JSX.Element {
           <Text style={styles.buttonText}>🔑 Unirse a Sala</Text>
         </Pressable>
 
-        <Pressable style={[styles.button, styles.buttonPrimary]} onPress={() => router.push('/unirse')}>
+        <Pressable style={[styles.button, styles.buttonPrimary]} onPress={() => router.push('/crear')}>
           <Text style={[styles.buttonText, styles.buttonTextPrimary]}>🎉 Crear Sala</Text>
         </Pressable>
       </View>

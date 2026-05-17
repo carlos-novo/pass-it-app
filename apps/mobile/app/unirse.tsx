@@ -14,7 +14,6 @@ export default function UnirseScreen(): JSX.Element {
     const c = codigo.trim().toUpperCase();
     if (c.length !== 6) return;
     unirseASala(c, nombreEquipo);
-    router.push(`/lobby/${c}`);
   };
 
   return (

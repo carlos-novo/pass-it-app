@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'expo-router';
 import useSocket, { conectar } from '@hooks/useSocket';
 import { useSalaStore } from '@store/sala.store';
 import { EventosSocket } from '@tipos-compartidos';
 
 export default function useSala() {
+  const router = useRouter();
   const { socket: obtenerSocket } = useSocket();
   const [ultimoError, setUltimoError] = useState<EventosSocket.ErrorPayload | null>(null);
   const lastJoinCodeRef = useRef<string | null>(null);
@@ -15,12 +17,16 @@ export default function useSala() {
     const onSalaCreada = (payload: EventosSocket.SalaCreadaPayload) => {
       useSalaStore.getState().establecerSala(payload.codigoSala, payload.equipo);
       useSalaStore.getState().actualizarEquipos([payload.equipo]);
+      router.replace(`/lobby/${payload.codigoSala}`);
     };
 
     const onEquipoUnido = (payload: EventosSocket.EquipoUnidoPayload) => {
       const codigo = lastJoinCodeRef.current ?? useSalaStore.getState().codigoSala ?? null;
-      if (codigo) useSalaStore.getState().establecerSala(codigo, payload.equipo);
-      useSalaStore.getState().actualizarEquipos(payload.equiposEnSala);
+      if (codigo) {
+        useSalaStore.getState().establecerSala(codigo, payload.equipo);
+        useSalaStore.getState().actualizarEquipos(payload.equiposEnSala);
+        router.replace(`/lobby/${codigo}`);
+      }
     };
 
     const onSalaActualizada = (payload: EventosSocket.SalaActualizadaPayload) => {
