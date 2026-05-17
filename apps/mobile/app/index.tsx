@@ -1,41 +1,77 @@
-import { Text, View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { MotiView } from 'moti';
+import { useRouter } from 'expo-router';
 
-/**
- * Pantalla de inicio temporal (placeholder).
- * Se sustituirá por la pantalla real del Lobby en el Módulo 2.
- */
-export default function PantallaInicio(): JSX.Element {
+export default function HomeScreen(): JSX.Element {
+  const router = useRouter();
+
   return (
-    <View style={estilos.contenedor}>
-      <Text style={estilos.titulo}>🎉 Pass It</Text>
-      <Text style={estilos.subtitulo}>El Party Game más frenético</Text>
-      <Text style={estilos.info}>Módulo 1 completado ✅</Text>
+    <View style={styles.container}>
+      <MotiView
+        from={{ opacity: 0, translateY: -20 }}
+        animate={{ opacity: 1, translateY: 0 }}
+        transition={{ type: 'timing', duration: 700 }}
+      >
+        <Text style={styles.title}>🎉 Pass It</Text>
+      </MotiView>
+
+      <Text style={styles.subtitle}>El Party Game más frenético</Text>
+
+      <View style={styles.actions}>
+        <Pressable style={styles.button} onPress={() => router.push('/unirse')}>
+          <Text style={styles.buttonText}>🔑 Unirse a Sala</Text>
+        </Pressable>
+
+        <Pressable style={[styles.button, styles.buttonPrimary]} onPress={() => router.push('/unirse')}>
+          <Text style={[styles.buttonText, styles.buttonTextPrimary]}>🎉 Crear Sala</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
 
-const estilos = StyleSheet.create({
-  contenedor: {
+const styles = StyleSheet.create({
+  container: {
     flex: 1,
     backgroundColor: '#0D0D1A',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
   },
-  titulo: {
-    fontSize: 48,
-    fontWeight: 'bold',
+  title: {
+    fontSize: 56,
+    fontWeight: '900',
     color: '#FFFFFF',
-    marginBottom: 12,
+    textAlign: 'center',
+    letterSpacing: 1,
+    marginBottom: 8,
   },
-  subtitulo: {
-    fontSize: 18,
+  subtitle: {
     color: '#A0A0C0',
     marginBottom: 32,
-    textAlign: 'center',
+    fontSize: 16,
   },
-  info: {
-    fontSize: 14,
-    color: '#6C63FF',
+  actions: {
+    width: '100%',
+    gap: 12,
+  },
+  button: {
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    borderRadius: 12,
+    backgroundColor: '#1A1A2B',
+    alignItems: 'center',
+  },
+  buttonPrimary: {
+    backgroundColor: '#6C63FF',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  buttonTextPrimary: {
+    color: '#0D0D1A',
   },
 });

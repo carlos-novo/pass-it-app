@@ -3,18 +3,18 @@
 Este documento divide el proyecto "Pass It" en módulos lógicos e iterativos. Al finalizar cada sección, deberemos marcar la casilla y realizar el commit correspondiente utilizando la convención de `Conventional Commits` (feat, fix, refactor, chore, etc.).
 
 ## 📦 Módulo 1: Setup y Arquitectura Base
-- [ ] Inicializar entorno de Frontend móvil (`Expo` + `TypeScript`).
-- [ ] Configurar linters, formateadores (`ESLint`, `Prettier`) y alias de rutas absolutas en Frontend.
-- [ ] Inicializar entorno de Backend (`NestJS` + `TypeScript`).
-- [ ] Configurar contenedor `Docker` con `Redis` para el almacenamiento en memoria local.
-- [ ] Crear estructura de directorios basada en `Clean Architecture` en ambos proyectos (Dominio, Aplicación, Infraestructura).
+- [x] Inicializar entorno de Frontend móvil (`Expo` + `TypeScript`).
+- [x] Configurar linters, formateadores (`ESLint`, `Prettier`) y alias de rutas absolutas en Frontend.
+- [x] Inicializar entorno de Backend (`NestJS` + `TypeScript`).
+- [x] Configurar contenedor `Docker` con `Redis` para el almacenamiento en memoria local.
+- [x] Crear estructura de directorios basada en `Clean Architecture` en ambos proyectos (Dominio, Aplicación, Infraestructura).
 
 ## 🔌 Módulo 2: Backend y Gestión de Salas (Lobby)
-- [ ] Implementar el adaptador de `Socket.io` en NestJS.
-- [ ] Crear el caso de uso `CrearSalaUseCase` (genera un código alfanumérico único para el lobby).
-- [ ] Crear el caso de uso `UnirseASalaUseCase` (los equipos se conectan usando el código).
-- [ ] Implementar eventos de socket: `equipo_unido`, `sala_actualizada`, `desconexion_equipo`.
-- [ ] Desarrollar la UI del Lobby en la App: Pantalla de inicio, crear sala, ingresar código, e introducir el nombre del equipo.
+- [x] Implementar el adaptador de `Socket.io` en NestJS.
+- [x] Crear el caso de uso `CrearSalaUseCase` (genera un código alfanumérico único para el lobby).
+- [x] Crear el caso de uso `UnirseASalaUseCase` (los equipos se conectan usando el código).
+- [x] Implementar eventos de socket: `equipo_unido`, `sala_actualizada`, `desconexion_equipo`.
+- [x] Desarrollar la UI del Lobby en la App: Pantalla de inicio, crear sala, ingresar código, e introducir el nombre del equipo.
 
 ## ⚙️ Módulo 3: Motor del Torneo (Core Logic)
 - [ ] Definir las entidades de dominio: `Torneo`, `Equipo`, y `Match`.
