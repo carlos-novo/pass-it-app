@@ -14,7 +14,7 @@ export type ResultadoAvanzarRonda =
   | { tipo: 'siguiente_minijuego'; payload: EventosSocket.MostrarEmparejamientoPayload }
   | { tipo: 'enfrentamiento_ganado'; payload: EventosSocket.MinijuegoFinalizadoPayload; torneo: Torneo }
   | { tipo: 'torneo_finalizado'; payload: EventosSocket.TorneoFinalizadoPayload }
-  | { tipo: 'final_iniciada'; enfrentamiento: Enfrentamiento; minijuego: EventosSocket.MostrarEmparejamientoPayload };
+  | { tipo: 'final_iniciada'; enfrentamiento: Enfrentamiento; minijuego: EventosSocket.MostrarEmparejamientoPayload; torneo: Torneo; semifinalFinalizada: Enfrentamiento };
 
 /**
  * CASO DE USO: Avanzar Ronda
@@ -111,6 +111,8 @@ export class AvanzarRondaUseCase {
             minijuegoActual: minijuegoFinal,
             numeroRonda: 1,
           },
+          torneo,
+          semifinalFinalizada: enfrentamiento,
         };
       }
 

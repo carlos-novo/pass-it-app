@@ -47,11 +47,14 @@ export class TorneoGateway {
     @ConnectedSocket() socket: Socket,
   ): Promise<void> {
     try {
-      const { torneoIniciado, primerEmparejamiento } =
+      const { torneoIniciado, emparejamientosIniciales } =
         await this.iniciarTorneoUseCase.ejecutar(body.codigoSala, body.modalidad);
 
       this.server.to(body.codigoSala).emit('torneo_iniciado', torneoIniciado);
-      this.server.to(body.codigoSala).emit('mostrar_emparejamiento', primerEmparejamiento);
+      
+      for (const emp of emparejamientosIniciales) {
+        this.server.to(body.codigoSala).emit('mostrar_emparejamiento', emp);
+      }
 
       this.logger.log(
         `Torneo iniciado en sala ${body.codigoSala} | Modalidad: Al mejor de ${body.modalidad}`,
@@ -93,7 +96,10 @@ export class TorneoGateway {
           break;
 
         case 'final_iniciada':
-          this.server.to(body.codigoSala).emit('minijuego_finalizado', { ganadorRonda: body.idEquipoGanador });
+          this.server.to(body.codigoSala).emit('minijuego_finalizado', {
+            ganadorRonda: body.idEquipoGanador,
+            enfrentamiento: resultado.semifinalFinalizada,
+          });
           this.server.to(body.codigoSala).emit('mostrar_emparejamiento', resultado.minijuego);
           break;
 

@@ -106,11 +106,22 @@ async function simularTorneo() {
 
   hostSocket.on('mostrar_emparejamiento', async (payload) => {
     const { enfrentamiento, minijuegoActual, numeroRonda } = payload;
+    
+    if (torneoActivo) {
+      const idx = torneoActivo.enfrentamientos.findIndex(
+        (e) => e.idEnfrentamiento === enfrentamiento.idEnfrentamiento
+      );
+      if (idx !== -1) {
+        torneoActivo.enfrentamientos[idx] = enfrentamiento;
+      }
+    }
+
     const eq1 = torneoActivo.equipos.find((e) => e.id === enfrentamiento.idEquipo1).nombre;
     const eq2 = torneoActivo.equipos.find((e) => e.id === enfrentamiento.idEquipo2).nombre;
 
     console.log(`\n🎮 [RONDA ${numeroRonda}] - Juego: ${minijuegoActual}`);
     console.log(`🥊 Compiten: ${eq1} vs ${eq2}`);
+    formatearBracket(torneoActivo);
 
     // Simular un retraso para la UX visual y luego reportar un ganador aleatorio de este juego
     setTimeout(() => {

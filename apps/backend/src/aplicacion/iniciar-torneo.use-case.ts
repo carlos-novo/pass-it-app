@@ -31,7 +31,7 @@ export class IniciarTorneoUseCase {
     modalidad: ModalidadEliminatoria,
   ): Promise<{
     torneoIniciado: EventosSocket.TorneoIniciadoPayload;
-    primerEmparejamiento: EventosSocket.MostrarEmparejamientoPayload;
+    emparejamientosIniciales: EventosSocket.MostrarEmparejamientoPayload[];
   }> {
     // 1. Obtener equipos de la sala
     const equipos = await this.repositorioSalas.obtenerEquiposDeSala(codigoSala);
@@ -64,19 +64,26 @@ export class IniciarTorneoUseCase {
       creadoEn: Date.now(),
     };
 
-    // 5. Seleccionar primer minijuego
-    const primerMinijuego = GestorMinijuegos.seleccionarSiguiente(
-      torneo.minijuegosUsadosEnTorneo,
-    );
-    torneo.minijuegosUsadosEnTorneo.push(primerMinijuego);
+    // 5. Iniciar todos los enfrentamientos de la fase inicial (semifinales o final directa) en progreso
+    const emparejamientosIniciales: EventosSocket.MostrarEmparejamientoPayload[] = [];
 
-    // Marcar el primer enfrentamiento activo como en progreso
-    const primerEnfrentamientoActivo = enfrentamientos.find(
-      (e) => e.estado === 'pendiente',
-    );
-    if (primerEnfrentamientoActivo) {
-      primerEnfrentamientoActivo.estado = 'en_progreso';
-      primerEnfrentamientoActivo.minijuegosJugados.push(primerMinijuego);
+    for (const enfrentamiento of enfrentamientos) {
+      if (enfrentamiento.estado === 'pendiente') {
+        enfrentamiento.estado = 'en_progreso';
+        
+        // Seleccionar un minijuego único para este enfrentamiento
+        const minijuego = GestorMinijuegos.seleccionarSiguiente(
+          torneo.minijuegosUsadosEnTorneo,
+        );
+        torneo.minijuegosUsadosEnTorneo.push(minijuego);
+        enfrentamiento.minijuegosJugados.push(minijuego);
+
+        emparejamientosIniciales.push({
+          enfrentamiento,
+          minijuegoActual: minijuego,
+          numeroRonda: 1,
+        });
+      }
     }
 
     // 6. Persistir torneo
@@ -85,12 +92,6 @@ export class IniciarTorneoUseCase {
     // 7. Construir payloads
     const torneoIniciado: EventosSocket.TorneoIniciadoPayload = { torneo };
 
-    const primerEmparejamiento: EventosSocket.MostrarEmparejamientoPayload = {
-      enfrentamiento: primerEnfrentamientoActivo ?? enfrentamientos[0],
-      minijuegoActual: primerMinijuego,
-      numeroRonda: 1,
-    };
-
-    return { torneoIniciado, primerEmparejamiento };
+    return { torneoIniciado, emparejamientosIniciales };
   }
 }
