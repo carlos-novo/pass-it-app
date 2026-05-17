@@ -36,11 +36,12 @@ export class IniciarTorneoUseCase {
     // 1. Obtener equipos de la sala
     const equipos = await this.repositorioSalas.obtenerEquiposDeSala(codigoSala);
 
-    if (!equipos || equipos.length < 2) {
-      throw new Error('EQUIPOS_INSUFICIENTES');
+    if (!equipos) {
+      throw new Error('SALA_NO_ENCONTRADA');
     }
-    if (equipos.length > 4) {
-      throw new Error('DEMASIADOS_EQUIPOS');
+
+    if (equipos.length !== 2 && equipos.length !== 4) {
+      throw new Error('CANTIDAD_EQUIPOS_INVALIDA');
     }
 
     // 2. Generar bracket

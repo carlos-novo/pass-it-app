@@ -113,8 +113,7 @@ export class TorneoGateway {
 
   private traducirError(codigo: string): string {
     const mensajes: Record<string, string> = {
-      EQUIPOS_INSUFICIENTES: 'Se necesitan al menos 2 equipos para iniciar el torneo.',
-      DEMASIADOS_EQUIPOS: 'No puede haber más de 4 equipos en el torneo.',
+      CANTIDAD_EQUIPOS_INVALIDA: 'El torneo solo se puede iniciar con exactamente 2 o 4 equipos.',
       TORNEO_NO_ENCONTRADO: 'No existe un torneo activo para esta sala.',
       ENFRENTAMIENTO_NO_ENCONTRADO: 'El enfrentamiento indicado no existe en el torneo.',
     };

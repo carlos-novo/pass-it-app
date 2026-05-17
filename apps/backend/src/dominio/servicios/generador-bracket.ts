@@ -29,25 +29,15 @@ export class GeneradorBracket {
   ): Enfrentamiento[] {
     const numEquipos = equipos.length;
 
-    if (numEquipos < 2 || numEquipos > 4) {
+    if (numEquipos !== 2 && numEquipos !== 4) {
       throw new Error(
-        `Número de equipos inválido: ${numEquipos}. Se requieren entre 2 y 4 equipos.`,
+        `CANTIDAD_EQUIPOS_INVALIDA`,
       );
     }
 
     if (numEquipos === 2) {
       // Final directa
       return [this.crearEnfrentamiento(equipos[0], equipos[1], 'final', modalidad)];
-    }
-
-    if (numEquipos === 3) {
-      // Equipo 1 vs Equipo 2 en semifinal. Equipo 3 pasa directo (bye).
-      // La segunda semifinal se crea como placeholder para el bracket
-      const semi1 = this.crearEnfrentamiento(equipos[0], equipos[1], 'semifinal', modalidad);
-      const semi2 = this.crearEnfrentamiento(equipos[2], equipos[2], 'semifinal', modalidad);
-      semi2.ganador = equipos[2].id; // Bye automático
-      semi2.estado = 'finalizado';
-      return [semi1, semi2];
     }
 
     // 4 equipos: 2 semifinales
