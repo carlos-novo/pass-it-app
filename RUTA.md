@@ -17,11 +17,11 @@ Este documento divide el proyecto "Pass It" en módulos lógicos e iterativos. A
 - [x] Desarrollar la UI del Lobby en la App: Pantalla de inicio, crear sala, ingresar código, e introducir el nombre del equipo.
 
 ## ⚙️ Módulo 3: Motor del Torneo (Core Logic)
-- [ ] Definir las entidades de dominio: `Torneo`, `Equipo`, y `Match`.
-- [ ] Implementar `IniciarTorneoUseCase`: Valida el número de equipos, selecciona la modalidad (Al mejor de 1, 3 o 5) y genera el *bracket* (llaves de emparejamiento).
-- [ ] Implementar el gestor aleatorio de minijuegos, aplicando la regla de negocio estricta de **no repetición**.
-- [ ] Crear eventos de socket para la sincronización de las pantallas de *versus* (`mostrar_emparejamiento`).
-- [ ] Desarrollar la UI del *Bracket* (Cuadro del torneo animado) en la app móvil.
+- [x] Definir las entidades de dominio: `Torneo`, `Equipo`, y `Match`.
+- [x] Implementar `IniciarTorneoUseCase`: Valida el número de equipos, selecciona la modalidad (Al mejor de 1, 3 o 5) y genera el *bracket* (llaves de emparejamiento).
+- [x] Implementar el gestor aleatorio de minijuegos, aplicando la regla de negocio estricta de **no repetición**.
+- [x] Crear eventos de socket para la sincronización de las pantallas de *versus* (`mostrar_emparejamiento`).
+- [x] Desarrollar la UI del *Bracket* (Cuadro del torneo animado) en la app móvil.
 
 ## 🕹️ Módulo 4: Minijuegos - Fase 1 (Precisión y Velocidad)
 - [ ] **Estructura Base Minijuegos:** Crear un componente HOC/Wrapper en React Native que maneje cuentas regresivas iniciales ("3, 2, 1, ¡Ya!").

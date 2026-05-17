@@ -1,5 +1,6 @@
 /**
  * HOOKS PERSONALIZADOS
  */
-export { default as useSocket } from './useSocket';
-export { default as useSala } from './useSala';
+export { useSocket } from './useSocket';
+export { useSala } from './useSala';
+export { useTorneo } from './useTorneo';

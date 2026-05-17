@@ -23,6 +23,6 @@ import { IRepositorioSalas } from '@dominio/repositorios/interfaces-repositorio'
       inject: [REPOSITORIO_SALAS],
     },
   ],
-  exports: [],
+  exports: [REPOSITORIO_SALAS],
 })
 export class SalasModule {}

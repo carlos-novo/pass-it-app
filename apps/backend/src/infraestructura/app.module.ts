@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SalasModule } from './salas/salas.module';
+import { TorneoModule } from './torneo/torneo.module';
 
 /**
  * Módulo raíz de la aplicación.
@@ -15,6 +16,7 @@ import { SalasModule } from './salas/salas.module';
       envFilePath: '.env',
     }),
     SalasModule,
+    TorneoModule,
   ],
   controllers: [],
   providers: [],
